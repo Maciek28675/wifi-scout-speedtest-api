@@ -22,10 +22,11 @@ class FileSize(int, Enum):
     description="This endpoint is used for testing download speed of a file with given size."
 )
 async def download(file_size_mb: FileSize):
-    file_path = f'static/files/{file_size_mb.value}MB.bin'
-    
+
+    file_path = f'app/static/files/{file_size_mb.value}MB.bin'
+
     if not os.path.exists(file_path):
-        raise HTTPException(status_code=404, detail=f"File size {file_size_mb} not available")
+        raise HTTPException(status_code=404, detail=f"File size {file_size_mb.value} not available")
     
     headers = {
         "Content-Disposition": f"attachment; filename=download_{file_size_mb}MB.bin",
